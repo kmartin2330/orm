@@ -280,6 +280,9 @@ class BasicEntityPersister implements EntityPersister
                 $paramIndex = 1;
 
                 foreach ($insertData[$tableName] as $column => $value) {
+                    if(isset($this->class->fieldMappings[$column]['readonly']) && $this->class->fieldMappings[$column]['readonly']){
+                        continue;
+                    }
                     $stmt->bindValue($paramIndex++, $value, $this->columnTypes[$column]);
                 }
             }
@@ -1461,6 +1464,10 @@ class BasicEntityPersister implements EntityPersister
 
         foreach ($this->class->reflFields as $name => $field) {
             if ($this->class->isVersioned && $this->class->versionField == $name) {
+                continue;
+            }
+
+            if(isset($this->class->fieldMappings[$name]['readonly']) && $this->class->fieldMappings[$name]['readonly']){
                 continue;
             }
 

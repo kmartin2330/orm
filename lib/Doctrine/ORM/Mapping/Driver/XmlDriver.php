@@ -804,6 +804,10 @@ class XmlDriver extends FileDriver
             $mapping['columnDefinition'] = (string) $fieldMapping['column-definition'];
         }
 
+        if (isset($fieldMapping['readonly'])) {
+            $mapping['readonly'] = (bool) $this->evaluateBoolean($fieldMapping['readonly']);
+        }
+
         if (isset($fieldMapping->options)) {
             $mapping['options'] = $this->_parseOptions($fieldMapping->options->children());
         }
