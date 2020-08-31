@@ -768,6 +768,10 @@ class YamlDriver extends FileDriver
             $mapping['version'] = $column['version'];
         }
 
+        if (isset($column['readonly'])) {
+            $mapping['readonly'] = (bool)$column['readonly'];
+        }
+
         if (isset($column['columnDefinition'])) {
             $mapping['columnDefinition'] = $column['columnDefinition'];
         }
